@@ -1,0 +1,61 @@
+version: '3.7'
+
+services:
+  
+  fake_service:
+    container_name: fake_service
+    image: ccr.ccs.tencentyun.com/jaychen/fake_service:0.2
+    environment:
+      - UPSTREAM_SVC_URL=http://upstream_service:9998
+    ports:
+      - "9999:9999"
+    networks:
+      - consul-net
+
+  fake_service_consul_client:
+    image: hashicorp/consul:1.12.0
+    container_name: fake_service_consul_client
+    volumes:
+     - ./consul-client/fake_service.json:/consul/config/client.json
+    networks:
+      - consul-net
+    command: "agent"
+    network_mode: "service:fake_service"
+
+  upstream_service:
+    image: ccr.ccs.tencentyun.com/jaychen/upstream_service:0.1
+    container_name: upstream_service
+    ports:
+      - "9998:9999"
+    networks:
+      - consul-net
+
+  upstream_service_consul_client:
+    image: hashicorp/consul:1.12.0
+    container_name: upstream_service_consul_client
+    volumes:
+     - ./consul-client/upstream_service.json:/consul/config/client.json
+    networks:
+      - consul-net
+    command: "agent"
+    network_mode: "service:upstream_service"
+
+  consul-server:
+    image: hashicorp/consul:1.12.0
+    container_name: consul-server
+    volumes:
+     - ./consul-service/server.json:/consul/config/server.json:ro
+    networks:
+      - consul-net
+    ports:
+      - "8500:8500"
+      - "8600:8600/tcp"
+      - "8600:8600/udp"
+    command: "agent"
+
+
+
+networks:
+  consul-net:
+    driver: bridge
+

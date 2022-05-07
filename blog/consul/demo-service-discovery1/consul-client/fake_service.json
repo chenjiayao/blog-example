@@ -1,0 +1,24 @@
+{
+    "node_name": "fake-service-consul-client",
+    "server": false,
+    "datacenter": "dc1",
+    "data_dir": "/consul/data",
+    "log_level":"INFO",
+    "retry_join":[
+        "consul-server"
+     ],
+    "service": {
+      "id": "fake_service",
+      "name": "fake_service",
+      "tags": ["v1"],
+      "address": "localhost",
+      "port": 9999,
+      "check": {
+        "id": "fake_service",
+        "name": "fake_service heath check",
+        "http": "http://localhost:9999/heath",
+        "interval": "10s",
+        "timeout": "1s"
+      }
+    }
+}

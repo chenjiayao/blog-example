@@ -1,0 +1,31 @@
+{
+    "service": {
+        "name": "redis_service",
+        "id": "redis_service",
+        "address": "10.5.0.6",
+        "port": 6379,
+        "tags": [
+            "5.0"
+        ],
+        "meta": {
+            "version": "5"
+        },
+        "checks":[
+            {
+                "id": "redis_service_check",
+                "tcp": "10.5.0.6:6379",
+                "interval": "5s"
+            }
+        ],
+        "connect": {
+            "sidecar_service": {
+                "port": 20000,
+                "check": {
+                    "name": "check envoy sidercar health",
+                    "tcp": "10.5.0.6:20000",
+                    "interval": "5s"
+                }
+            }
+        }
+    }
+}

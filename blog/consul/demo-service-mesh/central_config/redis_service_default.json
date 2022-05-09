@@ -1,0 +1,5 @@
+{
+    "kind": "service-defaults",
+    "name": "redis_service",
+    "protocol": "tcp"
+}

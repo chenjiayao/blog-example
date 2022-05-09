@@ -1,5 +1,6 @@
 data_dir  = "/tmp/"
 log_level = "DEBUG"
+node_name = "consul_server"
 
 datacenter = "dc1"
 

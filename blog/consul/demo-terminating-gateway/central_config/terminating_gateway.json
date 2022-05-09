@@ -1,0 +1,9 @@
+{
+  "Kind": "terminating-gateway",
+  "Name": "dc1-gateway",
+  "Services": [
+    {
+      "Name": "redis_service"
+    }
+  ]
+}

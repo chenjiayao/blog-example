@@ -1,0 +1,38 @@
+{
+    "service": {
+        "name": "upstream_service",
+        "id": "upstream_service_v2",
+        "address": "10.5.0.5",
+        "port": 9997,
+        "tags": [
+            "v1"
+        ],
+        "meta": {
+            "version": "2"
+        },
+        "check": {
+            "id": "upstream_service_v2_service_check",
+            "http": "http://10.5.0.5:9997/health",
+            "interval": "5s"
+        },
+        "connect": {
+            "sidecar_service": {
+                "port": 20000,
+                "check": {
+                    "name": "check envoy sidercar health",
+                    "tcp": "10.5.0.5:20000",
+                    "interval": "5s"
+                },
+                "proxy": {
+                    "upstreams": [
+                        {
+                            "destination_name": "redis_service",
+                            "local_bind_address": "127.0.0.1",
+                            "local_bind_port": 6379
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}

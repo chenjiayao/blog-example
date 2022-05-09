@@ -1,0 +1,16 @@
+{
+    "service": {
+        "name": "terminating_gateway",
+        "id": "terminating_gateway",
+        "address": "10.5.0.7",
+        "port": 6379,
+        "checks": [
+            {
+              "name": "terminating-gateway listening",
+              "tcp": "10.5.0.7:6379",
+              "interval": "5s",
+              "timeout": "1s"
+            }
+          ]
+    }
+}

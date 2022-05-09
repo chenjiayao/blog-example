@@ -30,7 +30,7 @@ services:
         ipv4_address: 10.5.0.7
 
   fake_service:
-    image: fake_service:1.0
+    image: ccr.ccs.tencentyun.com/jaychen/fake_service:1.0
     environment:
       UPSTREAM_SVC_URL: "http://localhost:9998/ping"
     ports:
@@ -57,7 +57,7 @@ services:
 
   # Define api v1 service and envoy sidecar proxy
   upstream_service_v1:
-    image: upstream_service:1.0
+    image: ccr.ccs.tencentyun.com/jaychen/upstream_service:1.0
     volumes:
       - "./service_config/upstream_service.ini:/app/development.ini"
     networks:
@@ -80,7 +80,7 @@ services:
     network_mode: "service:upstream_service_v1"
 
   upstream_service_v2:
-    image: upstream_service:2.0
+    image: ccr.ccs.tencentyun.com/jaychen/upstream_service:2.0
     volumes:
       - "./service_config/upstream_service.ini:/app/development.ini"
     networks:

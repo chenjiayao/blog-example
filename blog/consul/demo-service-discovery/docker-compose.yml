@@ -23,7 +23,7 @@ services:
     network_mode: "service:fake_service"
 
   upstream_service:
-    image: ccr.ccs.tencentyun.com/jaychen/upstream_service:0.1
+    image: ccr.ccs.tencentyun.com/jaychen/upstream_service:1.0
     container_name: upstream_service
     ports:
       - "9998:9999"
